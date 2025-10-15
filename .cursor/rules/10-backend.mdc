@@ -1,0 +1,27 @@
+---
+description: Backend (FastAPI) contracts and expectations.
+globs:
+  - "api/**"
+  - "configs/**"
+  - "pyproject.toml"
+---
+
+# API endpoints (stable)
+GET /health
+GET /fires?since=ISO&region=string
+GET /nowcast/{fire_id}?horizon=12|24|48
+GET /tiles/{fire_id}/{horizon}/{z}/{x}/{y}.png
+GET /report/{fire_id}
+GET /openapi.json
+
+# Schemas (must match)
+- /fires → list of {id, region, centroid{lat,lon}, detections{n,last_time}, bbox, status}
+- /nowcast/{id} → {grid_meta{center_lat,center_lon,crs,resolution_m}, horizon, assets{prob_tif,dir_tif,tile_template}, detections[], metrics{}, caveats[]}
+
+# Implementation notes
+- No heavy recompute on request; read from `data/products/**`.
+- Consistent CORS; timeouts ≤ 10s; 4xx/5xx with JSON problem details.
+- OpenAPI must be accurate; include JSON examples.
+
+# Testing
+- Endpoint golden tests using snapshot files under eval/snapshot.

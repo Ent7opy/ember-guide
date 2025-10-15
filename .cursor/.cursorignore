@@ -1,0 +1,30 @@
+# Secrets & env
+.env
+.env.*
+**/secrets.*
+configs/*secrets*.yml
+
+# Large data & caches (agent shouldn't scan these)
+data/raw/**
+data/interim/**
+data/products/tiles/**
+
+# External junk
+**/.ipynb_checkpoints/**
+**/__pycache__/**
+**/.mypy_cache/**
+**/.ruff_cache/**
+**/.pytest_cache/**
+
+# Big binaries & artifacts
+*.tif
+*.tiff
+*.nc
+*.zip
+*.parquet
+*.csv
+
+# Node/py build noise
+node_modules/**
+dist/**
+build/**

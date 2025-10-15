@@ -1,0 +1,17 @@
+---
+description: Safety, licensing, and messaging guardrails that apply everywhere.
+globs:
+  - "**/*"
+---
+
+# Safety & ethics
+- Always include: “Research preview — not for life-safety decisions.”
+- Never imply evacuation or tactical guidance.
+- Respect provider licenses (NASA/ECMWF/USGS/Copernicus) in footers.
+
+# Security
+- Do not read/write secrets; `.env*` are off-limits per .cursorignore.
+- Never commit credentials; prefer env vars.
+
+# Performance
+- Avoid loading entire rasters into memory when tiling; stream/Windowed reads.

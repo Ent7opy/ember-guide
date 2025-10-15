@@ -1,0 +1,18 @@
+---
+description: Optional AI modules (denoiser, calibration, micro-downscaler) and guardrails.
+globs:
+  - "ml/**"
+---
+
+# Modules
+- Denoiser: XGBoost/LightGBM classify hotspots real vs artefact (weak labels).
+- Calibration: isotonic/logistic maps baseline score (+context)→probability.
+- Micro-downscaler: RF/GPR for u,v,RH; only if it reduces nowcast error.
+
+# Splits & leakage
+- Split by {fire_complex, region, year}; no pixel/time leakage.
+- Optimize downstream CSI/IoU & reliability, not denoiser AUC alone.
+
+# Artifacts
+- Save under ml/models/* with version tag + MODEL_CARD.md update.
+- Provide toggle flags in config: use_denoiser, use_calibration, use_downscaler.

@@ -1,0 +1,27 @@
+---
+description: Batch pipeline (ingest → process → tiles); data layout; determinism.
+globs:
+  - "pipeline/**"
+  - "eval/**"
+  - "data/**"
+---
+
+# Data layout
+data/
+  raw/      # timestamped inputs with checksums
+  interim/  # aligned grids
+  products/ # tif, tiles, reports, index.json
+
+# Steps
+1) Ingest: FIRMS hotspots, ERA5 (u,v,temp,dewpoint), SRTM DEM. Cache with timestamps.
+2) Prep: reproject/alignment; cluster hotspots into fire objects; AOI.
+3) Model: baseline grid update; MC perturbations; write prob/dir GeoTIFF.
+4) Calibration: post-hoc isotonic/logistic → calibrated probability.
+5) Tiles: produce XYZ PNG or COGs; write `products/index.json`.
+
+# Command contracts (Make/CLI)
+- `make refresh` runs ingest→process→tiles from config.
+- `make eval` runs on eval/snapshot without network.
+
+# Determinism
+- Fix random seeds; record code + config versions in products metadata.

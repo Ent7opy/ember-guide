@@ -1,0 +1,14 @@
+---
+description: Streamlit UI constraints and UX rules.
+globs:
+  - "ui/**"
+---
+
+# UI principles
+- Map page shows detections, wind barbs, probability heatmap; toggle p≥0.3/0.5/0.7.
+- No heavy compute; all data via API.
+- Include "last updated" timestamps and the non-tactical disclaimer.
+- Download buttons for GeoTIFF/report; metrics page shows reliability plots.
+
+# Tech
+- Streamlit + pydeck/folium; avoid blocking calls; debounce filters.

@@ -1,0 +1,29 @@
+---
+description: Core project context, goals, constraints, and conventions for EmberGuide (open wildfire nowcasts).
+globs:
+  - "**/*"
+---
+
+# Project one-liner
+EmberGuide produces 12–48 h probabilistic wildfire spread maps (direction + risk) from satellite hotspots, weather, and terrain. Research/communications tool — not tactical or life-safety.
+
+# High-level architecture
+Ingest (FIRMS/ERA5/DEM) → Prep (grid/cluster) → Baseline spread model (+ MC uncertainty) → Calibration → GeoTIFF/tiles → FastAPI → Streamlit UI.
+
+# Non-negotiables
+- Do NOT generate content implying operational/tactical use; include the disclaimer in UI/API docs.
+- Prefer auditable, deterministic code. Pin seeds. Avoid silent network calls in UI.
+- Keep heavy compute in pipeline; UI must call API only.
+- Always document data licenses/attribution in footers.
+
+# Coding conventions
+- Python 3.11+, type hints, ruff/black/mypy; small pure functions over monoliths.
+- Config via `configs/*.yml` and env vars; no hardcoded paths.
+- Return JSON schemas exactly as in `api/contracts` (see backend rule).
+- Tests use pytest; golden fixtures for raster/tiles.
+
+# Glossary (for the agent)
+- nowcast = 12–48 h forecast
+- hotspot = MODIS/VIIRS active fire pixel (seed; not perimeter)
+- DEM/slope/aspect from SRTM
+- calibration = map model score→real probability (isotonic/logistic)
