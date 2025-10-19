@@ -1,0 +1,39 @@
+# EmberGuide POC - Fire Spread Model Configuration
+
+model:
+  # Timestep in hours
+  timestep_hours: 1
+  # Total forecast hours
+  forecast_hours: 24
+  # Neighborhood for spread (4=cardinal, 8=cardinal+diagonal)
+  neighbors: 8
+
+factors:
+  # Weights for spread components
+  wind_weight: 0.5
+  slope_weight: 0.3
+  dryness_weight: 0.2
+  
+  # Wind speed threshold (m/s) - minimum for significant spread
+  wind_threshold_ms: 2.0
+  
+  # Slope threshold (degrees) - maximum upslope boost
+  slope_max_deg: 45.0
+  
+  # RH threshold (%) - below this is "dry"
+  rh_dry_threshold: 30.0
+
+thresholds:
+  # Minimum risk score to spread to neighbor [0-1]
+  spread_threshold: 0.3
+  # Initial seed strength
+  seed_strength: 1.0
+
+monte_carlo:
+  # Number of ensemble members
+  n_ensemble: 20
+  # Weather perturbations (fraction of value)
+  wind_perturbation: 0.2  # ±20%
+  temp_perturbation: 0.05  # ±5%
+  rh_perturbation: 0.1    # ±10%
+

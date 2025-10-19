@@ -1,6 +1,6 @@
 # Secrets & env
-.env
-.env.*
+# .env
+# .env.*
 **/secrets.*
 configs/*secrets*.yml
 

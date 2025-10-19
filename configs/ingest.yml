@@ -1,0 +1,39 @@
+# EmberGuide POC - Data Ingestion Configuration
+
+firms:
+  # API endpoint
+  base_url: "https://firms.modaps.eosdis.nasa.gov/api/area/csv"
+  # Data source (MODIS or VIIRS)
+  source: "VIIRS_NOAA20_NRT"
+  # Days to look back
+  days_lookback: 7
+  # Retry settings
+  max_retries: 3
+  retry_delay_seconds: 5
+
+era5:
+  # Copernicus CDS configuration
+  base_url: "https://cds.climate.copernicus.eu/api/v2"
+  # Dataset name
+  dataset: "reanalysis-era5-single-levels"
+  # Variables to download
+  variables:
+    - "10m_u_component_of_wind"
+    - "10m_v_component_of_wind"
+    - "2m_temperature"
+    - "2m_dewpoint_temperature"
+  # Hours to fetch (hourly for 24h + buffer)
+  hours: 30
+  # Retry settings
+  max_retries: 5
+  retry_delay_seconds: 10
+
+srtm:
+  # SRTM data source
+  base_url: "https://srtm.csi.cgiar.org/wp-content/uploads/files/srtm_5x5/TIFF"
+  # Resolution (90m for global, 30m for US)
+  resolution: "90m"
+  # Retry settings
+  max_retries: 3
+  retry_delay_seconds: 5
+

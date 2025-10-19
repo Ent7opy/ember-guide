@@ -1,0 +1,26 @@
+# EmberGuide POC - ML Modules Configuration
+
+denoiser:
+  # Enable/disable denoiser
+  enabled: true
+  # Minimum confidence for VIIRS hotspots (0-100)
+  min_confidence: 75
+  # MODIS confidence levels to keep
+  modis_confidence_levels:
+    - "nominal"
+    - "high"
+  # Persistence filter: minimum detections in time window
+  persistence_min_detections: 2
+  persistence_radius_km: 5.0
+  persistence_window_hours: 48
+
+calibration:
+  # Enable/disable calibration
+  enabled: true
+  # Method: "isotonic" or "platt" (logistic)
+  method: "isotonic"
+  # Model path (relative to project root)
+  model_path: "ml/models/calibrator_poc.pkl"
+  # If model doesn't exist, create with mock data
+  create_mock_model: true
+

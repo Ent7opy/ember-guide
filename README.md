@@ -25,12 +25,14 @@ Unlike tactical fire models, EmberGuide is designed for:
 
 ---
 
-## Quick Start
+## Quick Start (POC)
 
 ### Prerequisites
 - Python 3.11+
-- A NASA Earthdata account (for FIRMS hotspots)
-- Copernicus Climate Data Store (CDS) account (for ERA5 weather)
+- (Optional) NASA Earthdata account (for FIRMS hotspots)
+- (Optional) Copernicus Climate Data Store (CDS) account (for ERA5 weather)
+
+**Note**: POC can run with mock data if API keys are not available!
 
 ### Installation
 
@@ -46,40 +48,33 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Configure credentials (see docs/DATA_SOURCES.md)
+# Configure credentials (optional - will use mock data if not provided)
 cp .env.example .env
-# Edit .env with your API keys
+# Edit .env with your API keys (or leave empty for mock data)
 ```
 
-### First Run (Offline Evaluation)
+### Run the POC
 
-Test the system without downloading live data:
-
+**Step 1: Generate nowcast data**
 ```bash
-# Run evaluation on historical snapshot (2 fires)
-make eval
-
-# View results
-open eval/snapshot/reports/summary.html
+python -m pipeline.run --config configs/active.yml
 ```
 
-### Live Run
-
-Fetch current data and generate nowcasts:
-
+**Step 2: Start the API** (in new terminal)
 ```bash
-# Configure your region/fires in configs/active.yml
-# Run the full pipeline
-make refresh
-
-# Start the API server
 make serve-api
-
-# Launch the UI (in another terminal)
-make serve-ui
+# Or: uvicorn api.main:app --port 8000
 ```
 
-Visit `http://localhost:8501` to see the interactive map.
+**Step 3: Launch the UI** (in new terminal)
+```bash
+make serve-ui
+# Or: streamlit run ui/app.py --server.port 8501
+```
+
+Visit `http://localhost:8501` to see the interactive map!
+
+**Full setup guide**: See [docs/POC_SETUP.md](docs/POC_SETUP.md)
 
 ---
 

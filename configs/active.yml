@@ -1,0 +1,22 @@
+# EmberGuide POC - Active Fire Configuration
+# Defines the fire to process
+
+fire:
+  id: fire_001
+  region: CA_north
+  # Bounding box: [west, south, east, north] in WGS84
+  # Example: Northern California area
+  bbox: [-122.5, 38.5, -121.0, 40.0]
+  # Fetch hotspots since this date (ISO 8601)
+  since: "2024-10-01T00:00:00Z"
+  # Nowcast horizon in hours
+  horizon: 24
+
+global:
+  # Grid resolution in meters
+  resolution_m: 1000
+  # Random seed for reproducibility
+  seed: 42
+  # Monte Carlo ensemble size (smaller for POC)
+  n_ensemble: 20
+

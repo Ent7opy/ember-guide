@@ -1,0 +1,28 @@
+# EmberGuide POC - Data Preparation Configuration
+
+clustering:
+  # DBSCAN parameters for hotspot clustering
+  eps_km: 5.0  # Maximum distance between points in same cluster
+  min_samples: 3  # Minimum hotspots to form a cluster
+
+grid:
+  # Target CRS (will be determined from fire centroid)
+  # Format: "auto" or specific UTM zone like "EPSG:32610"
+  crs: "auto"
+  # Resolution in meters
+  resolution_m: 1000
+  # Buffer around fire cluster in km
+  buffer_km: 50
+
+terrain:
+  # Slope calculation method
+  algorithm: "horn"  # Horn's method for slope/aspect
+  # Compute aspect (true/false)
+  compute_aspect: true
+
+weather:
+  # RH calculation parameters (Magnus formula)
+  # T_dew and T_air in Kelvin
+  magnus_a: 17.27
+  magnus_b: 237.7
+
